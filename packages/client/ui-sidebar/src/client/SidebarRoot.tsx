@@ -22,6 +22,7 @@ import {
   FishLogo, IconNewChatOutline16, IconPanelLeftOutline16, Tooltip,
 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { InjectFace, PropsRenderSlots, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
+import { useBrandMarkInk } from './brandInk.ts'
 import type {
   SidebarPanelMetadata, SidebarRootComponentProps, SidebarRootInjected, SidebarSectionOwnerProps,
 } from './contract/slots.ts'
@@ -162,6 +163,9 @@ export function SidebarRoot({
   }, [pointerInside])
 
   const buildVersion = localBuildVersion()
+  // The shell owns the mark's seat, so it also owns the ink the occupant
+  // inherits: whoever fills sidebar.brand.mark paints in the duty-hours color.
+  const brandInk = useBrandMarkInk()
 
   return (
     <div
@@ -188,7 +192,7 @@ export function SidebarRoot({
             onClick={() => { startSession() }}
           >
             <span className={css.brandIdentity} aria-hidden="true">
-              <span className={css.brandMark}>
+              <span className={css.brandMark} data-ink={brandInk}>
                 {renderSlot('sidebar.brand.mark', { size: 24 }, { fallback: <FishLogo size={24} /> })}
               </span>
               <span className={css.brandName}>
@@ -216,7 +220,7 @@ export function SidebarRoot({
             onClick={() => { toggleSidebar() }}
           >
             {!wide && (
-              <span className={css.railMark} aria-hidden="true">
+              <span className={css.railMark} data-ink={brandInk} aria-hidden="true">
                 {renderSlot('sidebar.brand.mark', { size: 24 }, { fallback: <FishLogo size={24} /> })}
               </span>
             )}

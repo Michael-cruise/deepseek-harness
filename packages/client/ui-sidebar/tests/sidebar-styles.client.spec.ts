@@ -72,4 +72,11 @@ describe('SidebarRoot.module.css', () => {
     expect(declarations('.fallbackBrandName')?.get('font-size')).toBe('17px')
     expect(declarations('.fallbackBrandName')?.get('white-space')).toBe('nowrap')
   })
+
+  it('paints both brand-mark seats with the duty-hours ink', () => {
+    for (const seat of ['.brandMark', '.railMark']) {
+      expect(declarations(`${seat}[data-ink='duty']`)?.get('color')).toBe('#c43a31')
+      expect(declarations(`${seat}[data-ink='off']`)?.get('color')).toBe('#148050')
+    }
+  })
 })

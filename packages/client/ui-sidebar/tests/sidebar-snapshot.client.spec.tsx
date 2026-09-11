@@ -24,10 +24,15 @@ beforeEach(() => {
   vi.stubEnv('DSH_CLIENT_COMMIT_HASH', 'abc1234')
   vi.stubEnv('DSH_CLIENT_GIT_DIRTY', 'true')
   vi.stubEnv('DSH_CLIENT_VERSION', '1.2.3-rc.4')
+  // The brand mark reports the local duty window, so the clock is pinned to a
+  // weekday inside it: the snapshots then hold one ink state instead of
+  // flipping with the machine that runs them.
+  vi.useFakeTimers({ shouldAdvanceTime: true, now: new Date(2026, 0, 5, 10, 0) })
 })
 
 afterEach(() => {
   cleanup()
+  vi.useRealTimers()
   vi.unstubAllEnvs()
 })
 

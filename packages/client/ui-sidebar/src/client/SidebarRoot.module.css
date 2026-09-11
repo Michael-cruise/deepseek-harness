@@ -223,6 +223,20 @@
   justify-content: center;
 }
 
+/* Duty-hours ink: the mark is the sidebar's standing brand signal, so it also
+   reports the local working window (Mon–Fri 09:00–12:00 and 14:00–18:00). The
+   seat carries the state, so the fish fallback and any occupant that paints
+   currentColor inherit the same ink. */
+.brandMark[data-ink='duty'],
+.railMark[data-ink='duty'] {
+  color: #c43a31;
+}
+
+.brandMark[data-ink='off'],
+.railMark[data-ink='off'] {
+  color: #148050;
+}
+
 /* Rail icons ride the primary ink (figma rail spec); expanded keeps the
    secondary icon-button ink. */
 .collapsed .iconButton {
