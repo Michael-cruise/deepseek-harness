@@ -208,6 +208,8 @@ export function SidebarRoot({
                 })}
               </span>
             </span>
+            {/* Additive readouts sit right of the name block; empty renders nothing. */}
+            {renderSlot('sidebar.brand.accessory', {})}
           </button>
         )}
         {/* Rail resting state is the whale mark; hovering swaps in the panel
